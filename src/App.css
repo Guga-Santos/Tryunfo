@@ -1,31 +1,28 @@
-body{
-    padding: 0;
-    margin: 0;
-    background-color: aliceblue;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
+body {
+  align-items: center;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 .forms {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .labels {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
-input,
-textarea,
-select {
-    margin: 10px 0px;
+input, textarea, select {
+  margin: 10px 0;
 }
