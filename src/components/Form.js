@@ -24,9 +24,10 @@ class Form extends Component {
           Digite o nome da carta:
           <input
             type="text"
+            id="name"
             data-testid="name-input"
             className="text"
-            name="name"
+            name="cardName"
             value={ cardName }
             onChange={ onInputChange }
           />
@@ -37,7 +38,8 @@ class Form extends Component {
           <textarea
             data-testid="description-input"
             className="textarea"
-            name="description"
+            id="description"
+            name="cardDescription"
             value={ cardDescription }
             onChange={ onInputChange }
           />
@@ -49,7 +51,8 @@ class Form extends Component {
             type="number"
             data-testid="attr1-input"
             className="attr-1"
-            name="attr-1"
+            id="attr-1"
+            name="cardAttr1"
             value={ cardAttr1 }
             onChange={ onInputChange }
           />
@@ -61,7 +64,8 @@ class Form extends Component {
             type="number"
             data-testid="attr2-input"
             className="attr-2"
-            name="attr-2"
+            id="attr-2"
+            name="cardAttr2"
             value={ cardAttr2 }
             onChange={ onInputChange }
           />
@@ -73,7 +77,8 @@ class Form extends Component {
             type="number"
             data-testid="attr3-input"
             className="attr-3"
-            name="attr-3"
+            id="attr-3"
+            name="cardAttr3"
             value={ cardAttr3 }
             onChange={ onInputChange }
           />
@@ -85,7 +90,8 @@ class Form extends Component {
             type="text"
             data-testid="image-input"
             className="image"
-            name="image"
+            id="image"
+            name="cardImage"
             value={ cardImage }
             onChange={ onInputChange }
           />
@@ -96,7 +102,8 @@ class Form extends Component {
           <select
             data-testid="rare-input"
             className="select"
-            name="select"
+            id="select"
+            name="cardRare"
             value={ cardRare }
             onChange={ onInputChange }
           >
@@ -110,7 +117,8 @@ class Form extends Component {
           <input
             type="checkbox"
             data-testid="trunfo-input"
-            name="checkbox"
+            name="cardTrunfo"
+            id="checkbox"
             checked={ cardTrunfo }
             onChange={ onInputChange }
           />

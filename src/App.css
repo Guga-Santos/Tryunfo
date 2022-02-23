@@ -11,6 +11,11 @@ h1 {
   text-align: center;
 }
 
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
 .forms {
   align-items: center;
   display: flex;
@@ -25,4 +30,15 @@ h1 {
 
 input, textarea, select {
   margin: 10px 0;
+}
+
+img {
+  width: 250px;
+}
+
+.cardbox {
+  display: flex;
+  flex-direction: column;
+  margin-left: 40%;
+
 }

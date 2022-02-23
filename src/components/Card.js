@@ -15,7 +15,7 @@ class Card extends Component {
     } = this.props;
 
     return (
-      <>
+      <div className="cardbox">
         <h2 data-testid="name-card">
           {' '}
           { cardName }
@@ -54,7 +54,7 @@ class Card extends Component {
             Super Trunfo
           </p>
         ) : ''}
-      </>
+      </div>
     );
   }
 }
