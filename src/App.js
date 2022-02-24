@@ -38,8 +38,9 @@ class App extends React.Component {
 
     this.setState((before) => ({
       cards: [...before.cards, before],
+      hasTrunfo: before.cards.some((obj) => obj.cardTrunfo),
     }), () => {
-      this.setState({
+      this.setState((prev) => ({
         cardName: '',
         cardDescription: '',
         cardAttr1: '0',
@@ -47,9 +48,9 @@ class App extends React.Component {
         cardAttr3: '0',
         cardImage: '',
         cardRare: 'normal',
-        hasTrunfo: false,
+        hasTrunfo: prev.cards.some((obj) => obj.cardTrunfo),
         isSavedButtonDisabled: true,
-      });
+      }));
     });
   }
 
