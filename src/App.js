@@ -8,7 +8,7 @@ class App extends React.Component {
     super();
 
     this.onInputChange = this.onInputChange.bind(this);
-    this.isSaveButtonDisabled = this.isSaveButtonDisabled.bind(this);
+    this.isSavedButtonDisabled = this.isSavedButtonDisabled.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
 
     this.state = {
@@ -30,7 +30,7 @@ class App extends React.Component {
     const { name, value, type, checked } = target;
     this.setState({
       [name]: type === 'checkbox' ? checked : value,
-    }, () => this.isSaveButtonDisabled());
+    }, () => this.isSavedButtonDisabled());
   }
 
   onSaveButtonClick(e) {
@@ -49,12 +49,12 @@ class App extends React.Component {
         cardImage: '',
         cardRare: 'normal',
         hasTrunfo: prev.cards.some((obj) => obj.cardTrunfo),
-        isSavedButtonDisabled: true,
+        isSaveButtonDisabled: true,
       }));
     });
   }
 
-  isSaveButtonDisabled() {
+  isSavedButtonDisabled() {
     const {
       cardName,
       cardDescription,
@@ -97,6 +97,19 @@ class App extends React.Component {
           />
           <Card { ...thisProps } />
         </div>
+        {thisProps.cards.map((obj) => (
+          <Card
+            key={ obj.cardName }
+            cardName={ obj.cardName }
+            cardDescription={ obj.cardDescription }
+            cardAttr1={ obj.cardAttr1 }
+            cardAttr2={ obj.cardAttr2 }
+            cardAttr3={ obj.cardAttr3 }
+            cardImage={ obj.cardImage }
+            cardRare={ obj.cardRare }
+            cardTrunfo={ obj.cardTrunfo }
+          />
+        ))}
       </div>
     );
   }
