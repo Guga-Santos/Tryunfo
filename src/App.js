@@ -33,8 +33,24 @@ class App extends React.Component {
     }, () => this.isSaveButtonDisabled());
   }
 
-  onSaveButtonClick() {
+  onSaveButtonClick(e) {
+    e.preventDefault();
 
+    this.setState((before) => ({
+      cards: [...before.cards, before],
+    }), () => {
+      this.setState({
+        cardName: '',
+        cardDescription: '',
+        cardAttr1: '0',
+        cardAttr2: '0',
+        cardAttr3: '0',
+        cardImage: '',
+        cardRare: 'normal',
+        hasTrunfo: false,
+        isSavedButtonDisabled: true,
+      });
+    });
   }
 
   isSaveButtonDisabled() {
@@ -73,7 +89,11 @@ class App extends React.Component {
       <div>
         <h1>Tryunfo</h1>
         <div className="container">
-          <Form { ...thisProps } onInputChange={ this.onInputChange } />
+          <Form
+            { ...thisProps }
+            onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
+          />
           <Card { ...thisProps } />
         </div>
       </div>
