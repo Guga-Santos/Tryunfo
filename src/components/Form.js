@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import '../App.css';
 
 class Form extends Component {
   render() {
@@ -20,6 +21,7 @@ class Form extends Component {
 
     return (
       <form className="forms">
+        <h2>Crie uma nova carta!</h2>
         <label className="labels" htmlFor="name">
           Digite o nome da carta:
           <input

@@ -8,8 +8,9 @@ class App extends React.Component {
     super();
 
     this.onInputChange = this.onInputChange.bind(this);
-    this.isSavedButtonDisabled = this.isSavedButtonDisabled.bind(this);
+    this.handleButtonDisable = this.handleButtonDisable.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
+    this.handleDeleteBtn = this.handleDeleteBtn.bind(this);
 
     this.state = {
       cardName: '',
@@ -26,35 +27,7 @@ class App extends React.Component {
     };
   }
 
-  onInputChange({ target }) {
-    const { name, value, type, checked } = target;
-    this.setState({
-      [name]: type === 'checkbox' ? checked : value,
-    }, () => this.isSavedButtonDisabled());
-  }
-
-  onSaveButtonClick(e) {
-    e.preventDefault();
-
-    this.setState((before) => ({
-      cards: [...before.cards, before],
-      hasTrunfo: before.cards.some((obj) => obj.cardTrunfo),
-    }), () => {
-      this.setState((prev) => ({
-        cardName: '',
-        cardDescription: '',
-        cardAttr1: '0',
-        cardAttr2: '0',
-        cardAttr3: '0',
-        cardImage: '',
-        cardRare: 'normal',
-        hasTrunfo: prev.cards.some((obj) => obj.cardTrunfo),
-        isSaveButtonDisabled: true,
-      }));
-    });
-  }
-
-  isSavedButtonDisabled() {
+  handleButtonDisable() {
     const {
       cardName,
       cardDescription,
@@ -83,11 +56,51 @@ class App extends React.Component {
     });
   }
 
+  handleDeleteBtn(e) {
+    const namedCard = e.target.name;
+
+    this.setState((before) => ({
+      cards: before.cards.filter((obj) => obj.cardName !== namedCard),
+      hasTrunfo: before.cards.some((ele) => ele.hasTrunfo === true),
+    }));
+  }
+
+  onSaveButtonClick(e) {
+    e.preventDefault();
+
+    this.setState((before) => ({
+      cards: [...before.cards, before],
+      hasTrunfo: before.cards.some((obj) => obj.hasTrunfo),
+    }), () => {
+      this.setState((prev) => ({
+        cardName: '',
+        cardDescription: '',
+        cardAttr1: '0',
+        cardAttr2: '0',
+        cardAttr3: '0',
+        cardImage: '',
+        cardRare: 'normal',
+        hasTrunfo: (prev.cards.some((obj) => obj.cardTrunfo)),
+        cardTrunfo: false,
+        isSaveButtonDisabled: true,
+      }));
+    });
+  }
+
+  onInputChange({ target }) {
+    const { name, value, type, checked } = target;
+    this.setState({
+      [name]: type === 'checkbox' ? checked : value,
+    },
+    () => this.handleButtonDisable(),
+    () => this.handleDeleteBtn());
+  }
+
   render() {
     const thisProps = this.state;
 
     return (
-      <div>
+      <div className="container-general">
         <h1>Tryunfo</h1>
         <div className="container">
           <Form
@@ -97,19 +110,33 @@ class App extends React.Component {
           />
           <Card { ...thisProps } />
         </div>
-        {thisProps.cards.map((obj) => (
-          <Card
-            key={ obj.cardName }
-            cardName={ obj.cardName }
-            cardDescription={ obj.cardDescription }
-            cardAttr1={ obj.cardAttr1 }
-            cardAttr2={ obj.cardAttr2 }
-            cardAttr3={ obj.cardAttr3 }
-            cardImage={ obj.cardImage }
-            cardRare={ obj.cardRare }
-            cardTrunfo={ obj.cardTrunfo }
-          />
-        ))}
+        <div className="cardDeck">
+          {thisProps.cards.map((obj) => (
+            <div className="card-" key={ Math.random() }>
+              <Card
+                key={ obj.cardName }
+                cardName={ obj.cardName }
+                cardDescription={ obj.cardDescription }
+                cardAttr1={ obj.cardAttr1 }
+                cardAttr2={ obj.cardAttr2 }
+                cardAttr3={ obj.cardAttr3 }
+                cardImage={ obj.cardImage }
+                cardRare={ obj.cardRare }
+                cardTrunfo={ obj.cardTrunfo }
+              />
+              <button
+                name={ obj.cardName }
+                key={ Math.random() }
+                type="button"
+                className="eraser"
+                data-testid="delete-button"
+                onClick={ this.handleDeleteBtn }
+              >
+                Excluir
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     );
   }

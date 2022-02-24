@@ -3,23 +3,80 @@ body {
   background-color: aliceblue;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   margin: 0;
   padding: 0;
+  width: 100%;
+}
+
+.root {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 h1 {
   text-align: center;
+  width: 100%;
+}
+
+.container-general {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .forms {
   align-items: center;
+  background-color: blanchedalmond;
   display: flex;
   flex-direction: column;
+  width: 50%;
+}
+
+.cardbox {
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin: 0 20px;
+  width: fit-content;
+}
+
+.card {
+  align-items: center;
+  background-color: rgb(255, 241, 110);
+  border: 10px solid black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  margin: 20px 0;
+  width: 30vh;
+}
+
+.card p {
+  margin: 5px;
+}
+
+.cardDeck {
+  display: flex;
+}
+
+.card- {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.eraser {
+  padding: 10px 25px;
 }
 
 .labels {
@@ -28,17 +85,25 @@ h1 {
   flex-direction: column;
 }
 
+
 input, textarea, select {
-  margin: 10px 0;
+  margin: 5px 0;
+}
+
+.imageBox {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  display: flex;
+  height: 50%;
+  justify-content: center;
+  width: 80%;
 }
 
 img {
-  width: 250px;
+  height: 90%;
+  overflow: hidden;
+  text-indent: 100%;
+  width: 90%;
 }
 
-.cardbox {
-  display: flex;
-  flex-direction: column;
-  margin-left: 40%;
-
-}
