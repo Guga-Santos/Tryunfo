@@ -25,6 +25,7 @@ class App extends React.Component {
       isSaveButtonDisabled: true,
       cards: [],
       filterName: '',
+      filterRare: 'todas',
     };
   }
 
@@ -126,10 +127,28 @@ class App extends React.Component {
               onChange={ this.onInputChange }
             />
           </label>
+          <label className="labels" htmlFor="filterRare">
+            Filtre seu deck pela raridade:
+            <select
+              name="filterRare"
+              data-testid="rare-filter"
+              id="filterRare"
+              className="filterRare"
+              onChange={ this.onInputChange }
+              value={ this.filterRare }
+            >
+              <option value="todas">Todas</option>
+              <option value="normal">normal</option>
+              <option value="raro">raro</option>
+              <option value="muito raro">muito raro</option>
+            </select>
+          </label>
         </div>
         <div className="cardDeck">
           {thisProps.cards
             .filter((card) => card.cardName.includes(thisProps.filterName))
+            .filter((ele) => ele.cardRare
+             === (thisProps.filterRare === 'todas' ? ele.cardRare : thisProps.filterRare))
             .map((obj) => (
               <div className="card-" key={ Math.random() }>
                 <Card
