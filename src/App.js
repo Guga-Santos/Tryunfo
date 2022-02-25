@@ -26,6 +26,7 @@ class App extends React.Component {
       cards: [],
       filterName: '',
       filterRare: 'todas',
+      trunfoFilter: '',
     };
   }
 
@@ -142,13 +143,30 @@ class App extends React.Component {
               <option value="raro">raro</option>
               <option value="muito raro">muito raro</option>
             </select>
+            <label
+              className="labels"
+              htmlFor="trunfoFilter"
+            >
+              Super Trunfo?
+              <input
+                type="checkbox"
+                data-testid="trunfo-filter"
+                name="trunfoFilter"
+                checked={ this.trunfoFilter }
+                onChange={ this.onInputChange }
+              />
+            </label>
           </label>
         </div>
         <div className="cardDeck">
           {thisProps.cards
+            .filter((object) => (thisProps.trunfoFilter
+              ? object.cardTrunfo === true : object))
             .filter((card) => card.cardName.includes(thisProps.filterName))
             .filter((ele) => ele.cardRare
-             === (thisProps.filterRare === 'todas' ? ele.cardRare : thisProps.filterRare))
+             === (thisProps.filterRare === 'todas'
+               ? ele.cardRare
+               : thisProps.filterRare))
             .map((obj) => (
               <div className="card-" key={ Math.random() }>
                 <Card
