@@ -24,6 +24,7 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       cards: [],
+      filterName: '',
     };
   }
 
@@ -62,7 +63,9 @@ class App extends React.Component {
     this.setState((before) => ({
       cards: before.cards.filter((obj) => obj.cardName !== namedCard),
       hasTrunfo: before.cards.some((ele) => ele.hasTrunfo === true),
-    }));
+    }), () => this.setState((prev) => ({
+      hasTrunfo: prev.cards.some((ele) => ele.hasTrunfo === true),
+    })));
   }
 
   onSaveButtonClick(e) {
@@ -110,32 +113,48 @@ class App extends React.Component {
           />
           <Card { ...thisProps } />
         </div>
+        <div className="filtersContainer">
+          <label className="labels" htmlFor="filterName">
+            Filtre seu deck pelo nome:
+            <input
+              id="filterName"
+              name="filterName"
+              type="text"
+              className="filter-name"
+              value={ this.filterName }
+              data-testid="name-filter"
+              onChange={ this.onInputChange }
+            />
+          </label>
+        </div>
         <div className="cardDeck">
-          {thisProps.cards.map((obj) => (
-            <div className="card-" key={ Math.random() }>
-              <Card
-                key={ obj.cardName }
-                cardName={ obj.cardName }
-                cardDescription={ obj.cardDescription }
-                cardAttr1={ obj.cardAttr1 }
-                cardAttr2={ obj.cardAttr2 }
-                cardAttr3={ obj.cardAttr3 }
-                cardImage={ obj.cardImage }
-                cardRare={ obj.cardRare }
-                cardTrunfo={ obj.cardTrunfo }
-              />
-              <button
-                name={ obj.cardName }
-                key={ Math.random() }
-                type="button"
-                className="eraser"
-                data-testid="delete-button"
-                onClick={ this.handleDeleteBtn }
-              >
-                Excluir
-              </button>
-            </div>
-          ))}
+          {thisProps.cards
+            .filter((card) => card.cardName.includes(thisProps.filterName))
+            .map((obj) => (
+              <div className="card-" key={ Math.random() }>
+                <Card
+                  key={ obj.cardName }
+                  cardName={ obj.cardName }
+                  cardDescription={ obj.cardDescription }
+                  cardAttr1={ obj.cardAttr1 }
+                  cardAttr2={ obj.cardAttr2 }
+                  cardAttr3={ obj.cardAttr3 }
+                  cardImage={ obj.cardImage }
+                  cardRare={ obj.cardRare }
+                  cardTrunfo={ obj.cardTrunfo }
+                />
+                <button
+                  name={ obj.cardName }
+                  key={ Math.random() }
+                  type="button"
+                  className="eraser"
+                  data-testid="delete-button"
+                  onClick={ this.handleDeleteBtn }
+                >
+                  Excluir
+                </button>
+              </div>
+            ))}
         </div>
       </div>
     );

@@ -73,6 +73,7 @@ h1 {
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
 }
 
 .eraser {
@@ -83,6 +84,7 @@ h1 {
   align-items: center;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 
@@ -105,5 +107,22 @@ img {
   overflow: hidden;
   text-indent: 100%;
   width: 90%;
+}
+
+.filtersContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 10px 0px;
+
+  background-color: coral;
+}
+
+.filter-name {
+  padding: 5px;
+  width: 30%;
 }
 
