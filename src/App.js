@@ -2,6 +2,7 @@ import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
 import './App.css';
+import PopUp from './components/PopUp';
 
 class App extends React.Component {
   constructor() {
@@ -11,6 +12,7 @@ class App extends React.Component {
     this.handleButtonDisable = this.handleButtonDisable.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.handleDeleteBtn = this.handleDeleteBtn.bind(this);
+    this.handleShuffleBtn = this.handleShuffleBtn.bind(this);
 
     this.state = {
       cardName: '',
@@ -27,7 +29,14 @@ class App extends React.Component {
       filterName: '',
       filterRare: 'todas',
       trunfoFilter: '',
+      trigger: false,
     };
+  }
+
+  handleShuffleBtn() {
+    this.setState( (before) => ({
+      trigger: !(before.trigger),
+    }));
   }
 
   handleButtonDisable() {
@@ -64,9 +73,8 @@ class App extends React.Component {
 
     this.setState((before) => ({
       cards: before.cards.filter((obj) => obj.cardName !== namedCard),
-      hasTrunfo: before.cards.some((ele) => ele.hasTrunfo === true),
     }), () => this.setState((prev) => ({
-      hasTrunfo: prev.cards.some((ele) => ele.hasTrunfo === true),
+      hasTrunfo: prev.cards.some((ele) => ele.cardTrunfo),
     })));
   }
 
@@ -105,14 +113,18 @@ class App extends React.Component {
     const thisProps = this.state;
 
     return (
+
       <div className="container-general">
         <h1>Tryunfo</h1>
+        {thisProps.trigger ? <PopUp /> : ''}
         <div className="container">
+
           <Form
             { ...thisProps }
             onInputChange={ this.onInputChange }
             onSaveButtonClick={ this.onSaveButtonClick }
           />
+
           <Card { ...thisProps } />
         </div>
         <div className="filtersContainer">
@@ -157,6 +169,16 @@ class App extends React.Component {
               />
             </label>
           </label>
+        </div>
+        <div className="shuffleContainer">
+          <button
+            type="button"
+            name="shuffleBtn"
+            className="shuffleBtn"
+            onClick={ this.handleShuffleBtn }
+          >
+            Embaralhar
+          </button>
         </div>
         <div className="cardDeck">
           {thisProps.cards
